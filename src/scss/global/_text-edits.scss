@@ -1,0 +1,96 @@
+@use '../vars-sass' as v;
+
+ins, del {
+  border-top: solid var(--bs-border-width) var(--bs-black);
+  font-size: var(--smalltext-size);
+  line-height: var(--line-height-tight);
+  // Hard-coded width alert
+  max-width: 10rem;
+  padding: calc(var(--gutter) / 2) var(--gutter);
+  position: relative;
+  text-decoration: none;
+
+  // Heading
+  &::before {
+    content: attr(title);
+    display: block;
+    font-weight: var(--heading-weight);
+  }
+}
+
+ins {
+  clear: left;
+  float: left;
+  padding-left: 0;
+}
+
+del {
+  clear: right;
+  float: right;
+  padding-right: 0;
+}
+
+// Where there's enough space, the `ins` and `del` elements appear
+// inside the gutter between the `main` and `article` tags
+@media (width > v.$site-width) {
+  main {
+    article {
+      position: relative;
+
+      ins, del {
+        border: none;
+        display: block;
+        float: none;
+        max-width: auto;
+        padding: calc(var(--gutter) / 2) var(--gutter);
+        position: absolute;
+        // This is used to line up the connecting line with the
+        // ascender of the inline box
+        transform: translate(0, calc(var(--bs-body-font-size) / 2.6));
+        // Desktop size: the gap between the site width and the content
+        // width
+        width: calc((var(--site-width) - var(--content-width)) / 2);
+        // The `top` value if not specified will match where the element
+        // would appear in the original text, if not removed from the
+        // document flow
+
+        // Connecting line
+        // This needs to be an pseudo-element rather than a border because
+        // it needs to be offset slightly and I want to share other
+        // declarations between `del` and `ins`.
+        &::after {
+          background: var(--bs-black);
+          content: "";
+          height: var(--bs-border-width);
+          position: absolute;
+          top: 0;
+        }
+      }
+
+      ins {
+        right: 100%;
+
+        &::after {
+          left: var(--gutter);
+          right: 0;
+        }
+      }
+
+      del {
+        left: 100%;
+
+        &::after {
+          left: 0;
+          right: var(--gutter);
+        }
+      }
+    }
+  }
+}
+
+mark {
+  background: var(--bs-warning-bg-subtle);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: var(--bs-border-width) calc(var(--gutter) / 2);
+}

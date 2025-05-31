@@ -1,6 +1,6 @@
 .hero {
   margin: 0 0 var(--bs-body-font-size);
-  padding: var(--bs-body-font-size);
+  padding: var(--gutter);
   position: relative;
 
   // The "background" image
@@ -19,7 +19,7 @@
   &__content {
     backdrop-filter: blur(1rem);
     background: rgba(var(--bs-body-bg-rgb), 0.5);
-    padding: var(--bs-body-font-size);
+    padding: var(--gutter);
     position: relative;
     z-index: 1;
   }

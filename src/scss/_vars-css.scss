@@ -1,0 +1,13 @@
+@use 'vars-sass' as v;
+
+// Typography
+:root {
+  // See _vars-sass.scss
+  // the #{} syntax is required for CSS variables as they can have almost
+  // any string value
+  --gutter: #{v.$gutter};
+  --largetext-size: 1.4rem;
+  --smalltext-size: 1rem;
+  --line-height-tight: 1.2;
+  --heading-weight: 600;
+}
