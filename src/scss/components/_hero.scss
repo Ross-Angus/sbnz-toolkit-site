@@ -1,0 +1,26 @@
+.hero {
+  margin: 0 0 var(--bs-body-font-size);
+  padding: var(--bs-body-font-size);
+  position: relative;
+
+  // The "background" image
+  picture {
+    img {
+      height: 100%;
+      left: 0;
+      object-fit: cover;
+      object-position: 50% 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  &__content {
+    backdrop-filter: blur(1rem);
+    background: rgba(var(--bs-body-bg-rgb), 0.5);
+    padding: var(--bs-body-font-size);
+    position: relative;
+    z-index: 1;
+  }
+}
