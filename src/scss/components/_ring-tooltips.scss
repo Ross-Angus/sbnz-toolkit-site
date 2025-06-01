@@ -1,0 +1,120 @@
+.ring-tooltips, .ring-tooltips li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ring-tooltips {
+  --3d: rotateX(50deg) rotateY(-10deg);
+
+  margin: 0 auto;
+  position: relative;
+  // width: 80%;
+
+  // The diagram is open
+  &.open {
+    li {
+      &:nth-child(-n+3) {
+        &::before { perspective: 70rem; }
+      }
+
+      // Economy
+      &:nth-child(1) {
+        &::before { transform: var(--3d) translate3d(0, 0, 10vw); }
+      }
+
+      // Society
+      &:nth-child(2) {
+        &::before { transform: var(--3d) translate3d(0, 0, 0); }
+      }
+
+      // Biosphere
+      &:nth-child(3) {
+        &::before { transform: var(--3d) translate3d(0, 0, -10vw); }
+      }
+    }
+  }
+
+  & li {
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    // Just the first three list items
+    &:nth-child(-n+3) {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      left: 50%;
+      justify-content: flex-end;
+      top: 0;
+      transform: translate(-50%, 0);
+
+      // These are the rings
+      &::before {
+        content: "";
+        border: solid 4vw #666;
+        border-radius: 50%;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        transition: all 0.5s;
+        width: 100%;
+        z-index: -1;
+      }
+    }
+
+    // Economy
+    &:nth-child(1) {
+      width: 60%;
+      z-index: 3;
+
+      &::before { border-color: var(--bs-primary); }
+    }
+
+    // Society
+    &:nth-child(2) {
+      z-index: 2;
+      width: 80%;
+
+      &::before { border-color: var(--bs-orange); }
+    }
+
+    // Biosphere
+    &:nth-child(3) {
+      position: static;
+      transform: translate3d(0, 0, 0);
+
+      &::before { border-color: var(--bs-success); }
+    }
+
+    // This contains the actions data. It is hidden by default and needs to sit on top of the diagram.
+    &:nth-child(n+4) {
+      backdrop-filter: blur(1rem);
+      background: rgba(var(--bs-body-bg-rgb), 0.5);
+      padding: var(--gutter);
+      z-index: 9;
+    }
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    summary {
+      display: block;
+    }
+  }
+}
+
+// For users without JS
+.no-js {
+  .ring-tooltips {
+    li {
+      &:nth-child(n+4) {
+        position: static;
+      }
+    }
+  }
+}
